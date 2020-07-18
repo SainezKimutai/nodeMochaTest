@@ -1,6 +1,6 @@
-process.env.NODE_ENV === 'test'
+process.env.NODE_ENV = 'test'
 const chai = require("chai")
-const chaiHttp = require("chai-http");
+const request = require('supertest');
 const should = chai.should();
 const expect = chai.expect;
 const assert = chai.assert;
@@ -9,7 +9,6 @@ const db = require('../db/index.js');
 const app = require('../server');
 
 
-chai.use(chaiHttp);
 
 describe('POST /api/v1/users', () => {
 
@@ -25,7 +24,7 @@ describe('POST /api/v1/users', () => {
   })
 
   it('OK, registering a user works', (done) => {
-    chai.request(app).post('/api/v1/users/')
+    request(app).post('/api/v1/users/')
       .send({email: 'kim@kim.com', name:'Kim', password: '123456', userRole: 'admin'})
       .then((res) => {
         const body = res.body;

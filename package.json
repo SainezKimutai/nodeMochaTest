@@ -4,7 +4,7 @@
   "description": "Mocha Test",
   "main": "server.js",
   "scripts": {
-    "test": "mocha --recursive-- exit"
+    "test": "mocha --recursive --exit --timeout 5000"
   },
   "author": "Sainez",
   "license": "ISC",
