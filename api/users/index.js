@@ -11,7 +11,6 @@ router.post('/login', preauth, controller.login);
 router.post('/',controller.create);
 router.put('/:id',controller.update);
 router.delete('/:id', controller.delete);
-router.delete('/', controller.deleteAll);
 router.post('/emailVerification', controller.emailVerification);
 router.post('/passwordResetCode', controller.passwordResetCode);
 router.post('/passwordReset',  controller.passwordReset);

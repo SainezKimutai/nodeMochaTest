@@ -23,14 +23,12 @@ async function authenticate(userParam) {
 
 // Create New User
 async function create(userParam){
-    console.log(userParam);
     // Check Id user existes
     if (await User.findOne({ email: userParam.email })) {
         return;
     }
 
     let user = new User(userParam);
-
     // Save User
     await user.save();
 

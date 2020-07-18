@@ -4,17 +4,25 @@
   "description": "Mocha Test",
   "main": "server.js",
   "scripts": {
-    "test": "test"
+    "test": "mocha --recursive-- exit"
   },
   "author": "Sainez",
   "license": "ISC",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
+    "body-parser": "latest",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-jwt": "^6.0.0",
+    "http": "0.0.1-security",
+    "mocha": "^8.0.1",
+    "mockgoose": "^8.0.4",
     "mongoose": "^5.9.25",
-    "nodemailer": "^6.4.10"
+    "nodemailer": "^6.4.10",
+    "request": "^2.88.2",
+    "supertest": "^4.0.2"
   }
 }

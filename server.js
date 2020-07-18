@@ -6,11 +6,8 @@ const urlencodedParser = bodyParser.urlencoded({limit: '20mb', extended: true, p
 const http = require('http');
 const server = http.createServer(app);
 const environ = require('dotenv').config();
-const config = require('./config');
 const routes = require('./router');
-
-
-const mongoose = require('mongoose');
+const db = require('./db/index.js')
 app.use(express.urlencoded({extended: false}));
 
 //cors
@@ -33,10 +30,9 @@ const logRequestStart = (req, res, next) => {
 app.use(logRequestStart);
 
 // Connecting to database
-mongoose.connect(config.mongo.url, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true}).then(r =>{
-  console.log('Database Connected...');
-}).catch(r =>{ console.log('Database Not Connected!!')});
+db.connect()
 
+// Routes
 routes.register(app);
 
 // Listening to port

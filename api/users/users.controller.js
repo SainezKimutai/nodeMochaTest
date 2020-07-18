@@ -37,11 +37,6 @@ exports.delete = (req, res, next) => {
         .then(()=> res.json({}))
         .catch(err => next(err));
 };
-exports.deleteAll = (req, res, next) => {
-    userService.deleteAll()
-        .then(()=> res.json({}))
-        .catch(err => next(err));
-};
 
 exports.invite = (req, res, next) => {
   mailService.inviteUser(req.body)
