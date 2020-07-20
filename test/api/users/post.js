@@ -15,7 +15,7 @@ describe('POST /api/v1/users', async () => {
 
   await afterEach(async () => await db.clear());
 
-  // await after(async () => await db.close());
+  await after(async () => await db.close());
 
   await it('OK, registering a user works', (done) => {
     request(app).post('/api/v1/users/')
