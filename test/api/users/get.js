@@ -14,7 +14,7 @@ describe('GET /api/v1/users', async () => {
 
   await afterEach(async () => await db.clear());
 
-  // await after(async () => await db.close());
+  await after(async () => await db.close());
 
   await it('OK, get all users', (done) => {
     request(app).get('/api/v1/users/')
