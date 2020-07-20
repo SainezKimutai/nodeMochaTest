@@ -1,32 +1,16 @@
 const mongoose = require('mongoose');
 const config = require('../config');
-
+const { MongoMemoryServer } = require('mongodb-memory-server');
+const mongod = new MongoMemoryServer();
 
 // make database connection
 function connect() {
   return new Promise((resolve, reject) => {
+    // make the actual connection
+    mongoose.connect(config.mongo.url, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
+        .then(() =>{ console.log('Database Connected...'); resolve()})
+        .catch((err) =>{ console.log('Database Not Connected!!'); resolve(err)});
 
-    // if the conection request if for test purpose, create a virtual db connection using Mockgoose
-    if (process.env.NODE_ENV === 'test') {
-
-      const Mockgoose = require('mockgoose').Mockgoose;
-      const mockgoose = new Mockgoose(mongoose);
-
-      mockgoose.prepareStorage()
-        .then(() => {
-          mongoose.connect(config.mongo.url, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
-              .then(() =>{ console.log('Database Connected...'); resolve()})
-              .catch((err) =>{ console.log('Database Not Connected!!'); resolve(err)});
-        })
-        .catch((err) => console.log(err))
-
-
-    } else {
-      // make the actual connection
-      mongoose.connect(config.mongo.url, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
-          .then(() =>{ console.log('Database Connected...'); resolve()})
-          .catch((err) =>{ console.log('Database Not Connected!!'); resolve(err)});
-    }
   })
 }
 
@@ -38,5 +22,9 @@ function close() {
     resolve()
   })
 }
+
+
+
+
 
 module.exports = { connect, close }

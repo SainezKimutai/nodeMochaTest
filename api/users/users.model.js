@@ -6,9 +6,9 @@ const Model = mongoose.model;
 // Schema
 const userSchema = new Schema({
   _id: { type: Schema.Types.ObjectId, auto: true },
-  email: String,
-  name: String,
-  password: String,
+  email: { type: String, required: true },
+  name: { type: String, required: true },
+  password: { type: String, required: true },
   userRole: { type: String, enum: ['admin', 'manager', 'normal'], default: 'normal' }, // to be used for protected auths
 });
 

@@ -4,7 +4,7 @@
   "description": "Mocha Test",
   "main": "server.js",
   "scripts": {
-    "test": "mocha --recursive --exit --timeout 5000"
+    "test": "mocha --recursive --exit --timeout 120000"
   },
   "author": "Sainez",
   "license": "ISC",
@@ -12,17 +12,19 @@
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "latest",
     "chai": "^4.2.0",
-    "chai-http": "^4.3.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-jwt": "^6.0.0",
     "http": "0.0.1-security",
     "mocha": "^8.0.1",
-    "mockgoose": "^8.0.4",
+    "mockgoose": "^7.3.5",
+    "mongodb-memory-server": "^6.6.1",
     "mongoose": "^5.9.25",
     "nodemailer": "^6.4.10",
-    "request": "^2.88.2",
     "supertest": "^4.0.2"
+  },
+  "devDependencies": {
+    "jest": "^26.1.0"
   }
 }

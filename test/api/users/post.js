@@ -1,28 +1,26 @@
+
 const chai = require("chai")
+const request = require('supertest');
 const should = chai.should();
 const expect = chai.expect;
 const assert = chai.assert;
 
-const db = require('../../../db/index.js');
-const routes = require('../../../router');
+const db = require('../../../db/test.js');
+const app = require('../../../server');
+process.env.NODE_ENV = 'test'
+
+describe('POST /api/v1/users', async () => {
 
 
-describe('POST /api/v1/users', () => {
+  await before(async () => await db.connect());
 
-  before((done) => {
-    db.connect()
-      .then(() => done())
-      .catch((err) => done(err))
-  })
-  after((done) => {
-    db.close()
-      .then(() => done())
-      .catch((err) => done(err))
-  })
+  await afterEach(async () => await db.clear());
 
-  it('OK, registering a user works', (done) => {
-    request(routes).post('/api/v1/users/')
-      send({email: 'kim@kim.com', name:'Kim', password: '123456', userRole: 'admin'})
+  await after(async () => await db.close());
+
+  await it('OK, registering a user works', (done) => {
+    request(app).post('/api/v1/users/')
+      .send({email: 'amon@amon.com', name:'Amon', password: '123456', userRole: 'manager'})
       .then((res) => {
         const body = res.body;
         expect(body).to.contain.property('_id');
@@ -31,6 +29,19 @@ describe('POST /api/v1/users', () => {
         expect(body).to.contain.property('userRole');
         done();
       })
+      .catch((err) => { done(err)})
+  })
+
+
+  await it('Fail, user must an email, password and a name', (done) => {
+    request(app).post('/api/v1/users/')
+      .send({email: 'sainez@sainez.com', userRole: 'manager'})
+      .then((res) => {
+        const body = res.body;
+        expect(res.status).to.equal(500);
+        done();
+      })
+      .catch((err) => { done(err)})
   })
 
 })
