@@ -8,6 +8,7 @@ const server = http.createServer(app);
 const environ = require('dotenv').config();
 const routes = require('./router');
 const db = require('./db/index.js')
+const testDB = require('./db/test.js')
 app.use(express.urlencoded({extended: false}));
 
 //cors
@@ -34,7 +35,14 @@ const logRequestStart = (req, res, next) => {
 app.use(logRequestStart);
 
 // Connecting to database
-db.connect()
+connectToDatabase = () => {
+  if (process.env.NODE_ENV === 'test') {
+      testDB.connect()
+  } else {
+      db.connect()
+  }
+}
+connectToDatabase()
 
 // Routes
 routes.register(app);

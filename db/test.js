@@ -7,13 +7,7 @@ const connect = () => {
   return new Promise( async(resolve, reject) => {
     const uri = await mongod.getConnectionString();
 
-    const mongooseOpts = {
-        useNewUrlParser: true,
-        autoReconnect: true,
-        reconnectTries: Number.MAX_VALUE,
-        reconnectInterval: 1000
-    };
-
+    const mongooseOpts = {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true};
     await mongoose.connect(uri, mongooseOpts);
     resolve()
   })
@@ -38,6 +32,7 @@ const close = async () => {
     return new Promise( async(resolve, reject) => {
       await mongoose.connection.close();
       await mongod.stop();
+      await mongoose.disconnect();
       resolve()
     })
 }

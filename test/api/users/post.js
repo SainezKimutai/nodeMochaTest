@@ -1,4 +1,4 @@
-
+process.env.NODE_ENV = 'test'
 const chai = require("chai")
 const request = require('supertest');
 const should = chai.should();
@@ -7,7 +7,6 @@ const assert = chai.assert;
 
 const db = require('../../../db/test.js');
 const app = require('../../../server');
-process.env.NODE_ENV = 'test'
 
 describe('POST /api/v1/users', async () => {
 
@@ -16,7 +15,7 @@ describe('POST /api/v1/users', async () => {
 
   await afterEach(async () => await db.clear());
 
-  await after(async () => await db.close());
+  // await after(async () => await db.close());
 
   await it('OK, registering a user works', (done) => {
     request(app).post('/api/v1/users/')

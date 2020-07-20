@@ -1,3 +1,4 @@
+process.env.NODE_ENV = 'test'
 const chai = require("chai")
 const request = require('supertest');
 const should = chai.should();
@@ -6,7 +7,6 @@ const assert = chai.assert;
 
 const db = require('../../../db/test.js');
 const app = require('../../../server');
-process.env.NODE_ENV = 'test'
 
 describe('GET /api/v1/users', async () => {
 
@@ -14,7 +14,7 @@ describe('GET /api/v1/users', async () => {
 
   await afterEach(async () => await db.clear());
 
-  await after(async () => await db.close());
+  // await after(async () => await db.close());
 
   await it('OK, get all users', (done) => {
     request(app).get('/api/v1/users/')
