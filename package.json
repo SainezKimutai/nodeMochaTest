@@ -21,7 +21,7 @@
     "mockgoose": "^7.3.5",
     "mongodb-memory-server": "^6.6.1",
     "mongoose": "^5.9.25",
-    "nodemailer": "^6.4.10",
+    "nodemailer": "^6.4.16",
     "supertest": "^4.0.2"
   },
   "devDependencies": {
