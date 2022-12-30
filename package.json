@@ -17,7 +17,7 @@
     "express": "^4.17.1",
     "express-jwt": "^6.0.0",
     "http": "0.0.1-security",
-    "mocha": "^8.0.1",
+    "mocha": "^8.4.0",
     "mockgoose": "^7.3.5",
     "mongodb-memory-server": "^6.6.1",
     "mongoose": "^5.9.25",
